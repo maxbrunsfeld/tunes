@@ -1,11 +1,13 @@
 (ns config.db
-  (:require [korma.db :as kdb]))
+  (:use [korma.db]))
 
-(def params
-  {:db "tunes"
+(def spec
+  {:subprotocol "postgresql"
+   :host "127.0.0.1"
+   :port "5432"
+   :db "tunes"
    :user "maxbrunsfeld"
    :password ""
-   :host "127.0.0.1"
-   :port "5432" })
+   :subname "//127.0.0.1:5432/tunes" })
 
-(kdb/defdb dev (kdb/postgres params))
+(defdb dev (postgres spec))

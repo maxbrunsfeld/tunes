@@ -5,6 +5,5 @@
 
 (defroutes routes
   (GET "/" [] (resp/redirect "/tunes"))
-
   (GET "/tunes" [] (tune/index))
   (GET "/tunes/:id" [id] (tune/show id)))
