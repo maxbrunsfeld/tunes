@@ -12,8 +12,15 @@
 
 (defn all []
   (select tunes))
+
 (defn find-by-id [id]
   (-> (select tunes (where {:id id}) (limit 1)) first))
+
+(defn create [attrs]
+  (insert tunes (values attrs)))
+
+(defn destroy-all []
+  (delete tunes))
 
 (defn- seq->sql-string
   [coll]

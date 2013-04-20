@@ -11,7 +11,13 @@
                  [hiccup "1.0.2"]
                  [korma "0.3.0-beta11"]
                  [drift "1.4.5"]]
+
   :plugins [[lein-ring "0.8.3"]
-            [drift "1.4.5"]]
+            [drift "1.4.5"]
+            [speclj "2.5.0"]]
   :ring {:handler tunes.app/handler}
-  :main tunes.app)
+  :main tunes.app
+  :test-paths ["spec/"]
+
+  :profiles
+  {:dev {:dependencies [[speclj "2.5.0"]]}})
