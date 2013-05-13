@@ -1,18 +1,22 @@
 (ns tunes.views.tune
   (:use [hiccup.page :only (html5)]))
 
-(declare layout main stylesheet head tune-url chords-list)
+(declare layout main stylesheet head subhead tune-url chords-list)
 
 (defn new []
   (layout
-    "New Tune"
-    [:div]))
+    {:title "New Tune" :section "new"}
+    [:h2 "Add a Tune"]
+    [:form {:action "/tunes" :method "POST"}
+     [:input {:name "name" :type "text" :placeholder "Name"}]
+     [:textarea {:name "chords" :placeholder "Chords"}]
+     [:input {:type "submit" :value "Save"}]]))
 
 (defn index [tunes]
   (layout
-    "Tunes"
+    {:title "Tunes" :section "index"}
     [:h2 "Latest Tunes"]
-    [:ol
+    [:ol.tunes
       (for [tune tunes]
         [:li
          [:a {:href (tune-url tune)} (:name tune)]
@@ -20,19 +24,22 @@
 
 (defn show [tune]
   (layout
-    (:name tune)
+    {:title (:name tune) :section "show"}
     [:h2 (:name tune)]
     (chords-list tune)))
 
 ;; Partials
 
-(defn- layout [title & content]
+(defn- layout
+  [{:keys [title section-name]} & content]
   (html5
     [:head
      [:title title]]
-     (stylesheet "/stylesheets/tune.css")
+     (stylesheet "tune")
+     (stylesheet "reset")
     [:body
      (head)
+     (subhead section-name)
      (main content)]))
 
 (defn- main [& content]
@@ -40,9 +47,17 @@
 
 (defn- head []
   [:div#head
-   [:div.links
-    [:a#new-tune {:href "/tunes/new"} "Add a tune"]]
    [:h1 "Tunes"]])
+
+(def nav-links
+  {"Most Recent Tunes" "/tunes"
+   "Add a Tune" "/tunes/new"})
+
+(defn- subhead [current-section]
+  [:div#subhead
+   [:ol#nav-links
+    (for [[text url] nav-links]
+      [:li [:a {:href url} text]])]])
 
 (defn- chords-list
   [tune]
@@ -59,4 +74,4 @@
 ;; Generic Helpers
 
 (defn stylesheet [filename]
-  [:link {:rel "stylesheet" :type "text/css" :href filename}])
+  [:link {:rel "stylesheet" :type "text/css" :href (str "/stylesheets/" filename ".css")}])

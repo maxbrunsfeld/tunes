@@ -1,12 +1,14 @@
 (ns tunes.app
-  (:require 
-    [tunes.routes :as routes]
-    [ring.adapter.jetty :as ring]
-    [ring.middleware.resource :as resource]))
+  (:use
+    [ring.adapter.jetty :only [run-jetty]]
+    [tunes.routes :only [routes]]
+    [ring.middleware.resource :only [wrap-resource]]
+    [ring.middleware.params :only [wrap-params]]))
 
 (def handler
-  (-> routes/routes
-      (resource/wrap-resource "public")))
+  (-> routes
+      wrap-params
+      (wrap-resource "public")))
 
 (defn -main []
-  (ring/run-jetty handler {:port 8000 :join? false}))
+  (run-jetty handler {:port 8000 :join? false}))
