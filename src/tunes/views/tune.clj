@@ -1,7 +1,8 @@
 (ns tunes.views.tune
-  (:use [hiccup.page :only (html5)]))
+  (:use [tunes.views.render :only (render)]
+        [tunes.views.helpers :only (script inline-script stylesheet tune-url)]))
 
-(declare layout main stylesheet head subhead tune-url chords-list)
+(declare layout main head subhead chords-list)
 
 (defn new []
   (layout
@@ -32,8 +33,10 @@
 
 (defn- layout
   [{:keys [title section-name]} & content]
-  (html5
+  (render
     [:head
+     (script "app")
+     (inline-script "goog.require('tunes.app');")
      [:title title]]
      (stylesheet "tune")
      (stylesheet "reset")
@@ -65,13 +68,3 @@
    (for [chord (:chords tune)]
      [:li.chord chord])])
 
-;; Helpers
-
-(defn- tune-url
-  [tune]
-  (str "/tunes/" (:id tune)))
-
-;; Generic Helpers
-
-(defn stylesheet [filename]
-  [:link {:rel "stylesheet" :type "text/css" :href (str "/stylesheets/" filename ".css")}])
