@@ -1,9 +1,9 @@
-(ns tunes.controllers.tune_spec
+(ns app.apis.tune_spec
   (:use [speclj.core]
         [wishful.core]
         [wishful.speclj])
-  (:require [tunes.controllers.tune :as controller]
-            [tunes.models.tune :as model]
+  (:require [app.apis.tune :as controller]
+            [app.models.tune :as model]
             [net.cgrand.enlive-html :as enlive]))
 
 (defn parse-html

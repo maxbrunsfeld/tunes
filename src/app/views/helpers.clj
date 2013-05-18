@@ -1,4 +1,4 @@
-(ns tunes.views.helpers)
+(ns app.views.helpers)
 
 ;; Helpers
 

@@ -1,4 +1,4 @@
-(ns tunes.models.tune
+(ns app.models.tune
   (:require [clojure.string :as string]
             [config.db])
   (:use korma.core)

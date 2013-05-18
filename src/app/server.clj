@@ -1,7 +1,7 @@
-(ns tunes.app
+(ns app.server
   (:use
     [ring.adapter.jetty :only [run-jetty]]
-    [tunes.routes :only [routes]]
+    [app.routes :only [routes]]
     [ring.middleware.resource :only [wrap-resource]]
     [ring.middleware.params :only [wrap-params]]))
 

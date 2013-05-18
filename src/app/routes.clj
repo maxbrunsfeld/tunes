@@ -1,6 +1,6 @@
-(ns tunes.routes
+(ns app.routes
   (:use [compojure.core :only (defroutes GET POST)])
-  (:require [tunes.controllers.tune :as tune]
+  (:require [app.apis.tune :as tune]
             [ring.util.response :as resp]))
 
 (defroutes routes

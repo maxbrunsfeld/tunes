@@ -1,6 +1,7 @@
-(ns tunes.views.tune
-  (:use [tunes.views.render :only (render)]
-        [tunes.views.helpers :only (script inline-script stylesheet tune-url)]))
+(ns app.views.tune
+  (:use [app.views.helpers
+         :only
+         (script inline-script stylesheet tune-url)]))
 
 (declare layout main head subhead chords-list)
 
@@ -18,10 +19,10 @@
     {:title "Tunes" :section "index"}
     [:h2 "Latest Tunes"]
     [:ol.tunes
-      (for [tune tunes]
-        [:li
-         [:a {:href (tune-url tune)} (:name tune)]
-         (chords-list tune)])]))
+     (for [tune tunes]
+       [:li
+        [:a {:href (tune-url tune)} (:name tune)]
+        (chords-list tune)])]))
 
 (defn show [tune]
   (layout
@@ -33,17 +34,16 @@
 
 (defn- layout
   [{:keys [title section-name]} & content]
-  (render
-    [:head
-     (script "app")
-     (inline-script "goog.require('tunes.app');")
-     [:title title]]
-     (stylesheet "tune")
-     (stylesheet "reset")
-    [:body
-     (head)
-     (subhead section-name)
-     (main content)]))
+  (list [:head
+         (script "app")
+         (inline-script "goog.require('app.client');")
+         [:title title]]
+        (stylesheet "tune")
+        (stylesheet "reset")
+        [:body
+         (head)
+         (subhead section-name)
+         (main content)]))
 
 (defn- main [& content]
   (into [:div#main] content))

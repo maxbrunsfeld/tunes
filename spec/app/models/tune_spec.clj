@@ -1,6 +1,6 @@
-(ns tunes.models.tune-spec
+(ns app.models.tune-spec
   (:use speclj.core)
-  (:require [tunes.models.tune :as tune]))
+  (:require [app.models.tune :as tune]))
 
 (describe "creating a tune"
   (before (tune/destroy-all))

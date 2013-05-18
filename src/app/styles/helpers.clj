@@ -1,4 +1,4 @@
-(ns tunes.styles.helpers)
+(ns app.styles.helpers)
 
 (def horizontally-padded
   (let [x "20px"]

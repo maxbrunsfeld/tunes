@@ -13,21 +13,24 @@
                  [korma "0.3.0-beta11"]
                  [gaka "0.3.0"]
                  [drift "1.4.5"]
-                 [crate "0.2.4"]]
+
+                 ;; For clojurescript
+                 [prismatic/dommy "0.1.1"]]
 
   :plugins [[lein-ring "0.8.3"]
             [drift "1.4.5"]
             [speclj "2.5.0"]
             [lein-cljsbuild "0.3.2"]]
 
-  :ring {:handler tunes.app/handler}
-  :main tunes.app
+  :ring {:handler app.server/handler}
+  :main app.server
   :test-paths ["spec/"]
 
-  :cljsbuild {:crossovers [tunes.views.tune tunes.views.helpers]
+  :cljsbuild {:crossovers [app.views.tune
+                           app.views.helpers]
               :crossover-path "target/cljs-crossovers"
               :builds
-              [{:source-paths ["src-cljs"]
+              [{:source-paths ["src"]
                 :compiler
                 {:output-to "resources/public/js/app.js"
                  :optimizations :whitespace
@@ -39,5 +42,5 @@
                         [org.apache.httpcomponents/httpcore "4.2.3"]
                         [com.github.detro.ghostdriver/phantomjsdriver "1.0.1"]
                         [enlive "1.0.0"]
-                        ; [wishful "0.1.1"]
+                        [wishful "0.1.1"]
                         ]}})

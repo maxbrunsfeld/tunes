@@ -1,4 +1,4 @@
-(ns tunes.styles.index
+(ns app.styles.index
   (:use gaka.core))
 
 (def stylesheet-dir

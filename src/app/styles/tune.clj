@@ -1,5 +1,5 @@
-(ns tunes.styles.tune
-  (:use tunes.styles.helpers))
+(ns app.styles.tune
+  (:use app.styles.helpers))
 
 (def rules
   [
