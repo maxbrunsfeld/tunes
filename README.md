@@ -13,7 +13,7 @@ lein ring-server
 
 ## Testing
 
-Tunes uses the lovely [speclj](http://github.com/slagyr/speclj) for testing.
+Tunes uses [speclj](http://github.com/slagyr/speclj) and specljs for testing.
 To run specs automatically as you change files:
 
 ```

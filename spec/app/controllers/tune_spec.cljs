@@ -1,7 +1,12 @@
 (ns app.controllers.tune-spec
-  (:require [app.controllers.tune :as controller]))
+  (:use-macros [specljs.core :only (describe it)])
+  (:require [specljs.core]
+            [app.controllers.tune :as controller]))
 
-(defn run []
-  (assert true)
-  (assert false))
+(describe "controllers.tune"
+  (it "works"
+    (assert true))
+
+  (it "fails"
+    (assert (= 1 2))))
 

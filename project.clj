@@ -19,7 +19,7 @@
 
   :plugins [[lein-ring "0.8.3"]
             [drift "1.4.5"]
-            [speclj "2.5.0"]
+            [speclj "2.7.2"]
             [lein-cljsbuild "0.3.2"]]
 
   :ring {:handler app.server/handler}
@@ -54,7 +54,8 @@
                }}
 
   :profiles
-  {:dev {:dependencies [[speclj "2.5.0"]
+  {:dev {:dependencies [[speclj "2.7.2"]
+                        [specljs "2.7.2"]
                         [clj-webdriver "0.6.0-beta2"]
                         [org.apache.httpcomponents/httpcore "4.2.3"]
                         [com.github.detro.ghostdriver/phantomjsdriver "1.0.1"]

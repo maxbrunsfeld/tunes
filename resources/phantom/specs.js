@@ -8,7 +8,7 @@ if (!url) {
 var page = require('webpage').create();
 
 page.onConsoleMessage = function(message) {
-  console.log("Test console: " + message);
+  console.log(message);
 };
 
 console.log("Loading URL: " + url);
