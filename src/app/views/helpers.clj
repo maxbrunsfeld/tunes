@@ -1,13 +1,5 @@
 (ns app.views.helpers)
 
-;; Helpers
-
-(defn tune-url
-  [tune]
-  (str "/tunes/" (:id tune)))
-
-;; Generic Helpers
-
 (defn inline-script [code]
   [:script {:type "text/javascript"} code])
 
@@ -16,4 +8,3 @@
 
 (defn stylesheet [filename]
   [:link {:rel "stylesheet" :type "text/css" :href (str "/stylesheets/" filename ".css")}])
-

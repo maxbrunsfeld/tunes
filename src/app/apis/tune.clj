@@ -13,7 +13,7 @@
   (render (view/show (model/find-by-id (Integer/parseInt id)))))
 
 (defn new []
-  (render (view/new) ))
+  (render (view/new)))
 
 (defn create [values]
   (model/create (symbolize-keys values))

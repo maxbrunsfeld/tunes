@@ -26,15 +26,32 @@
   :main app.server
   :test-paths ["spec/"]
 
-  :cljsbuild {:crossovers [app.views.tune
-                           app.views.helpers]
-              :crossover-path "target/cljs-crossovers"
+  :test-commands {"client" ["phantomjs"
+                            "resources/phantom/specs.js"
+                            "resources/public/specs.html"]}
+
+  :cljsbuild {:crossover-path "target/cljs-crossovers"
+
+              :crossovers
+              [app.views.tune
+               app.views.layouts
+               app.views.helpers]
+
               :builds
-              [{:source-paths ["src"]
+              {:dev
+               {:source-paths ["src"]
                 :compiler
                 {:output-to "resources/public/js/app.js"
                  :optimizations :whitespace
-                 :pretty-print true}}]}
+                 :pretty-print true}}
+
+               :specs
+               {:source-paths ["src" "spec"]
+                :compiler
+                {:output-to "resources/public/js/specs.js"
+                 :optimizations :whitespace
+                 :pretty-print true}}
+               }}
 
   :profiles
   {:dev {:dependencies [[speclj "2.5.0"]

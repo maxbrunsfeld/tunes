@@ -4,11 +4,13 @@
   (:use-macros [dommy.macros :only [sel sel1]]
                [app.views.render-client :only [render]]))
 
-(defn start []
-  (doseq [item (chord-items)]
-    (dom/append!
-      item
-      [:button "hi"])))
+(declare chord-clicked)
 
-(defn chord-items []
-  (sel [:.tunes :li.chord]))
+(defn start []
+  (setup-chord-clicks))
+
+(defn setup-chord-clicks []
+  (dom/listen! [(sel1 :body) :.tunes :li.chord] :click chord-clicked))
+
+(defn chord-clicked [x]
+  (println x))

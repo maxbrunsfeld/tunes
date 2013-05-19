@@ -1,12 +1,10 @@
 (ns app.views.tune
-  (:use [app.views.helpers
-         :only
-         (script inline-script stylesheet tune-url)]))
+  (:require [app.views.layouts :as layouts]))
 
-(declare layout main head subhead chords-list)
+(declare chords-list tune-url)
 
 (defn new []
-  (layout
+  (layouts/main
     {:title "New Tune" :section "new"}
     [:h2 "Add a Tune"]
     [:form {:action "/tunes" :method "POST"}
@@ -15,7 +13,7 @@
      [:input {:type "submit" :value "Save"}]]))
 
 (defn index [tunes]
-  (layout
+  (layouts/main
     {:title "Tunes" :section "index"}
     [:h2 "Latest Tunes"]
     [:ol.tunes
@@ -25,42 +23,12 @@
         (chords-list tune)])]))
 
 (defn show [tune]
-  (layout
+  (layouts/main
     {:title (:name tune) :section "show"}
     [:h2 (:name tune)]
     (chords-list tune)))
 
-;; Partials
-
-(defn- layout
-  [{:keys [title section-name]} & content]
-  (list [:head
-         (script "app")
-         (inline-script "goog.require('app.client');")
-         [:title title]]
-        (stylesheet "tune")
-        (stylesheet "reset")
-        [:body
-         (head)
-         (subhead section-name)
-         (main content)]))
-
-(defn- main [& content]
-  (into [:div#main] content))
-
-(defn- head []
-  [:div#head
-   [:h1 "Tunes"]])
-
-(def nav-links
-  {"Most Recent Tunes" "/tunes"
-   "Add a Tune" "/tunes/new"})
-
-(defn- subhead [current-section]
-  [:div#subhead
-   [:ol#nav-links
-    (for [[text url] nav-links]
-      [:li [:a {:href url} text]])]])
+;; Helpers
 
 (defn- chords-list
   [tune]
@@ -68,3 +36,6 @@
    (for [chord (:chords tune)]
      [:li.chord chord])])
 
+(defn tune-url
+  [tune]
+  (str "/tunes/" (:id tune)))
