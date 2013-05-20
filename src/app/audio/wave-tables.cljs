@@ -4,7 +4,7 @@
 (declare wave-table)
 
 (defn major []
-  (wave-table [0 0 0 0] [0 3 3 1]))
+  (wave-table [0 0 0 0 0 0 0 0 0] [0 2 1 1 1 1 1 1 1]))
 
 (defn- float-array [coll]
   (js/Float32Array. (to-array coll)))
@@ -14,4 +14,3 @@
     *audio-context*
     (float-array sines)
     (float-array cosines)))
-

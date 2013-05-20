@@ -5,6 +5,7 @@
   []
   (list
     [:head
+     [:title "Specs"]
      (script "specs")
      (stylesheet "reset")]
     [:body]))

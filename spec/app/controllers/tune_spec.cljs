@@ -5,8 +5,4 @@
 
 (describe "controllers.tune"
   (it "works"
-    (assert true))
-
-  (it "fails"
-    (assert (= 1 2))))
-
+    (assert true)))
